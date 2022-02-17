@@ -58,7 +58,11 @@ def update_board(board: Board, player: Player, coords: Coords):
     :param player: the player that made the move
     :param coords: the coordinates (row, column) of the player's move
     """
-    board[coords[0]][coords[1]] = player
+    if board[coords[0]][coords[1]] == "*":
+        board[coords[0]][coords[1]] = player
+    else:
+        print("place taken, try again")
+        return False
 
 
 def get_move(player: Player) -> Coords:
@@ -115,9 +119,13 @@ def play_game(board_size: int = None):
         show_board(board)
         coordinates = get_move(current_player)
         update_board(board, current_player, coordinates)
-        if won(current_player, board):
-                break
+        if update_board(board, current_player, coordinates) != False:
+            if won(current_player, board):
+                    break
+            else:
+                continue
         current_player = switch_player(current_player)
+    show_board(board)
     show_winner(current_player)
 
 
