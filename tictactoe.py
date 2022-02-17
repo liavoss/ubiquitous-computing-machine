@@ -115,6 +115,8 @@ def play_game(board_size: int = None):
         show_board(board)
         coordinates = get_move(current_player)
         update_board(board, current_player, coordinates)
+        if won(current_player, board):
+                break
         current_player = switch_player(current_player)
     show_winner(current_player)
 
