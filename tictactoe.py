@@ -47,6 +47,9 @@ def check_columns(board, player):
 
 
 def won(player: Player, board: Board) -> bool:
+    """
+    Checking if there is a winner.
+    """
     return check_rows(board, player) or check_columns(board, player)
 
 
